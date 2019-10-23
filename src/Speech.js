@@ -73,7 +73,7 @@ class Speech extends Component {
       document.getElementById('final').innerHTML = finalTranscript
       console.log('************[FINALTRANSSCRIPT ]************ \n'+ finalTranscript); 
       this.setState({ttFinalTranscript: finalTranscript});
-      console.log('************[ THE STATE ]************ \n' + this.state.ttFinalTranscript ); 
+    
     //-------------------------COMMANDS------------------------------------
 
       const transcriptArr = finalTranscript.split(' ')
@@ -85,7 +85,7 @@ class Speech extends Component {
         recognition.onend = () => {
           console.log('Stopped listening per command')
           const finalText = transcriptArr.slice(0, -3).join(' ')
-          document.getElementById('final').innerHTML = finalText
+          document.getElementsByClassName('textinput').innerHTML = finalText
         }
       }
     }
@@ -99,8 +99,9 @@ class Speech extends Component {
   }
   
   inputHandler = () => {
-
+    console.log('************[ THE STATE ]************ \n' + this.state.ttFinalTranscript ); 
     return this.state.inputHandler; 
+
   }
 
   render() {
@@ -110,14 +111,15 @@ class Speech extends Component {
         <button id='microphone-btn' style={button} onClick={this.toggleListen} />
         <InputBox
           
-          changed={this.inputHandler}
+          paramsA={this.state.ttFinalTranscript}
+          paramsB={this.toggleListen}
         />
         <div id='interim' style={interim}></div>
         <div id='final' style={final}></div>
       </div>
     )
   }
-}
+}// end class 
 
 export default Speech
 
