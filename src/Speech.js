@@ -108,7 +108,7 @@ class Speech extends Component {
     return (
       <div style={container}> 
 
-        <button id='microphone-btn' style={button} onClick={this.toggleListen} />
+        {/* <button id='microphone-btn' style={button} onClick={this.toggleListen} /> */}
         <InputBox
           
           paramsA={this.state.ttFinalTranscript}

@@ -4,22 +4,28 @@ import React from 'react';
 const InputBox = (props) => {
 
     return (
-                    <div className="row">
-                        <div className="col s12">
-                            <div className="card indigo">
-                                <div className="card-content white-text">
-        
-                                    <input className="textinput" type="text"
-                                        defaultValue={props.paramsA}
-                                        
-                                    // onKeyPress={}
-                                    />
-                                   <button  onClick={props.paramsB} />
-                                </div>
-                            </div>
-                        </div>
+        <div className="row">
+            <div className="col s12 ">
+                <div className="card horizontal indigo">
+                    <div className="card-content white-text">
+
+                        <input className="textinput" type="text"
+                            defaultValue={props.paramsA}
+
+                        />
+                       
+
                     </div>
-                )
+
+
+                </div>
+                <button className="btn waves-effect waves-light" onClick={props.paramsB} name="mantis">Submit
+    
+  </button>
+             {/* <a className="waves-effect waves-light btn" onClick={props.paramsB}></a> */}
+            </div>
+        </div>
+    )
 }
 // class InputBox extends Component {
 
