@@ -10,19 +10,13 @@ const InputBox = (props) => {
                     <div className="card-content white-text">
 
                         <input className="textinput" type="text"
-                            defaultValue={props.paramsA}
-
+                            defaultValue={props.paramsAtranscript}
+                            onKeyPress={props.paramsCkeyinput}
                         />
-                       
-
                     </div>
-
-
                 </div>
-                <button className="btn waves-effect waves-light" onClick={props.paramsB} name="mantis">Submit
-    
-  </button>
-             {/* <a className="waves-effect waves-light btn" onClick={props.paramsB}></a> */}
+                <button className="btn waves-effect waves-light" onClick={props.paramsBToggleListen} name="mantis">Submit</button>
+            
             </div>
         </div>
     )

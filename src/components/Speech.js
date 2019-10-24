@@ -1,6 +1,6 @@
  
 import React, { Component } from "react"
-import InputBox from './components/InputBox/InputBox'; 
+import InputBox from './InputBox/InputBox'; 
 
 //------------------------SPEECH RECOGNITION-----------------------------
 
@@ -111,8 +111,9 @@ class Speech extends Component {
         {/* <button id='microphone-btn' style={button} onClick={this.toggleListen} /> */}
         <InputBox
           
-          paramsA={this.state.ttFinalTranscript}
-          paramsB={this.toggleListen}
+          paramsAtranscript={this.state.ttFinalTranscript}
+          paramsBToggleListen={this.toggleListen}
+          paramsCkeyinput={this.props.keyInput}
         />
         <div id='interim' style={interim}></div>
         <div id='final' style={final}></div>
@@ -155,4 +156,4 @@ const styles = {
     }
 }
 
-const { container, button, interim, final } = styles
+const { container, interim, final } = styles
