@@ -107,6 +107,14 @@ class Speech extends Component {
 
   }
 
+  speechhandler = () => {
+     
+      console.log('[SPEECH CLICKED]');
+      var utterThis = new SpeechSynthesisUtterance('Hello world');
+      synth.speak(utterThis);
+       
+  } 
+
   render() {
     return (
       <div style={container}> 
@@ -117,6 +125,7 @@ class Speech extends Component {
           paramsAtranscript={this.state.ttFinalTranscript}
           paramsBToggleListen={this.toggleListen}
           paramsCkeyinput={this.props.keyInput}
+          click={this.speechhandler}
         />
         <div id='interim' style={interim}></div>
         <div id='final' style={final}></div>
