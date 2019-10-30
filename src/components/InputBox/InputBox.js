@@ -5,7 +5,7 @@ const InputBox = (props) => {
 
     return (
         <div className="row">
-            <div className="col s12 ">
+            <div className="col m12 ">
                 <div className="card horizontal indigo">
                     <div className="card-content white-text">
 
@@ -16,6 +16,7 @@ const InputBox = (props) => {
                     </div>
                 </div>
                 <button className="btn waves-effect waves-light" onClick={props.paramsBToggleListen} name="mantis">Submit</button>
+                <button className="btn waves-effect waves-light" onClick={props.click} name="mantis">Voice</button>
             
             </div>
         </div>

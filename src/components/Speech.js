@@ -11,6 +11,9 @@ recognition.continous = true
 recognition.interimResults = true
 recognition.lang = 'en-US'
 
+//------------------------SPEECH SYNTHESIS-----------------------------
+const synth = window.speechSynthesis;
+
 
 //------------------------COMPONENT-----------------------------
 
