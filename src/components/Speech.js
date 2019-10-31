@@ -1,6 +1,6 @@
- 
+
 import React, { Component } from "react"
-import InputBox from './InputBox/InputBox'; 
+import InputBox from './InputBox/InputBox';
 
 //------------------------SPEECH RECOGNITION-----------------------------
 
@@ -18,17 +18,11 @@ const synth = window.speechSynthesis;
 //------------------------COMPONENT-----------------------------
 
 class Speech extends Component {
-
-  constructor(props) {
-    super(props)
-    
-    this.toggleListen = this.toggleListen.bind(this)
-    this.handleListen = this.handleListen.bind(this)
-  }
-
+ 
   state = {
     listening: false,
-    ttFinalTranscript: ''
+    ttFinalTranscript: '',
+    onOFFSwitch: false
   }
 
   toggleListen = () => {
@@ -61,9 +55,9 @@ class Speech extends Component {
       console.log("Listening!")
     }
 
-    let finalTranscript = ''; 
+    let finalTranscript = '';
 
-    
+
     recognition.onresult = event => {
       let interimTranscript = ''
 
@@ -74,16 +68,17 @@ class Speech extends Component {
       }
       document.getElementById('interim').innerHTML = interimTranscript
       document.getElementById('final').innerHTML = finalTranscript
-      console.log('************[FINALTRANSSCRIPT ]************ \n'+ finalTranscript); 
-      this.setState({ttFinalTranscript: finalTranscript});
-    
-    //-------------------------COMMANDS------------------------------------
+      console.log('************[FINALTRANSSCRIPT ]************ \n' + finalTranscript);
+      this.setState({ ttFinalTranscript: finalTranscript });
+      let speakith = this.state.ttFinalTranscript
+      this.speechhandler(speakith);
+      //-------------------------COMMANDS------------------------------------
 
       const transcriptArr = finalTranscript.split(' ')
       const stopCmd = transcriptArr.slice(-3, -1)
       console.log('stopCmd', stopCmd)
 
-      if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening'){
+      if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
         recognition.stop()
         recognition.onend = () => {
           console.log('Stopped listening per command')
@@ -92,38 +87,61 @@ class Speech extends Component {
         }
       }
     }
-    
-  //-----------------------------------------------------------------------
-    
+
+    //-----------------------------------------------------------------------
+
     recognition.onerror = event => {
       console.log("Error occurred in recognition: " + event.error)
     }
 
   }
-  
+
   inputHandler = () => {
-    console.log('************[ THE STATE ]************ \n' + this.state.ttFinalTranscript ); 
-    return this.state.inputHandler; 
+    console.log('************[ THE STATE ]************ \n' + this.state.ttFinalTranscript);
+    return this.state.inputHandler;
 
   }
 
-  speechhandler = () => {
-     
-      console.log('[SPEECH CLICKED]');
-      var utterThis = new SpeechSynthesisUtterance('Hello world');
-      synth.speak(utterThis);
-       
-  } 
+  speechhandler = (input) => {
+
+    console.log('[SPEECH CLICKED]');
+    var utterThis = new SpeechSynthesisUtterance(input);
+    synth.speak(utterThis);
+
+  }
+
+  app_flow = () => {
+    
+    let expression = this.state.listening;
+    switch (expression) {
+      case false:
+          this.toggleListen();
+       //   this.speechhandler(this.state.ttFinalTranscript);
+        console.log('[ SPEECH OFF ]');
+        break;
+      case true:
+        console.log('[ SPEECH ON ]');
+        // use voice to text and text to voice 
+        
+
+        break;
+      default:
+      // code block
+    }
+
+  }
+
+
 
   render() {
     return (
-      <div style={container}> 
+      <div style={container}>
 
         {/* <button id='microphone-btn' style={button} onClick={this.toggleListen} /> */}
         <InputBox
-          
+
           paramsAtranscript={this.state.ttFinalTranscript}
-          paramsBToggleListen={this.toggleListen}
+          paramsBToggleListen={this.app_flow}
           paramsCkeyinput={this.props.keyInput}
           click={this.speechhandler}
         />
@@ -132,6 +150,7 @@ class Speech extends Component {
       </div>
     )
   }
+
 }// end class 
 
 export default Speech
@@ -139,33 +158,33 @@ export default Speech
 //-------------------------CSS------------------------------------
 
 const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center'
-    },
-    button: {
-        width: '60px',
-        height: '60px',
-        background: 'lightblue',
-        borderRadius: '50%',
-        margin: '6em 0 2em 0'
-    },
-    interim: {
-        color: 'gray',
-        border: '#ccc 1px solid',
-        padding: '1em',
-        margin: '1em',
-        width: '300px'
-    },
-    final: {
-        color: 'black',
-        border: '#ccc 1px solid',
-        padding: '1em',
-        margin: '1em',
-        width: '300px'
-    }
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
+  },
+  button: {
+    width: '60px',
+    height: '60px',
+    background: 'lightblue',
+    borderRadius: '50%',
+    margin: '6em 0 2em 0'
+  },
+  interim: {
+    color: 'gray',
+    border: '#ccc 1px solid',
+    padding: '1em',
+    margin: '1em',
+    width: '300px'
+  },
+  final: {
+    color: 'black',
+    border: '#ccc 1px solid',
+    padding: '1em',
+    margin: '1em',
+    width: '300px'
+  }
 }
 
 const { container, interim, final } = styles
